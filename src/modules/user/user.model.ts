@@ -2,31 +2,41 @@
 import mongoose, { Schema } from "mongoose";
 
 const UserSchema = new Schema(
-  {
-    name: {
-      type: String,
-      required: true,
-      trim: true,
-    },
+    {
+        name: {
+            type: String,
+            required: true,
+            trim: true,
+        },
 
-    phone: {
-      type: String,
-      unique: true,
-      sparse: true, // allow null for guest users
-    },
+        phone: {
+            type: String,
+            unique: true,
+            sparse: true, // allow null for guest users
+        },
 
-    preferredLanguage: {
-      type: String,
-      enum: ["hi", "en", "mr"],
-      default: "hi",
-    },
+        preferredLanguage: {
+            type: String,
+            enum: ["hi", "en", "mr"],
+            default: "hi",
+        },
 
-    isGuest: {
-      type: Boolean,
-      default: true,
+        isGuest: {
+            type: Boolean,
+            default: true,
+        },
+
+        dailyUsageCount: {
+            type: Number,
+            default: 0,
+        },
+
+        lastUsageDate: {
+            type: String, // YYYY-MM-DD
+        },
+
     },
-  },
-  { timestamps: true }
+    { timestamps: true }
 );
 
 // Indexes (VERY IMPORTANT)

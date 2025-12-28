@@ -3,6 +3,7 @@ import cors from "cors";
 import helmet from "helmet";
 import routes from "./routes";
 import {connectDB} from "./config/db";
+import { apiRateLimiter } from "./middlewares/rateLimiter";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -15,6 +16,7 @@ connectDB();
 app.use(cors());
 app.use(helmet());
 app.use(express.json());
+app.use("/api", apiRateLimiter);
 
 // Routes
 app.use("/api", routes);

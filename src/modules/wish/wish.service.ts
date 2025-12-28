@@ -1,6 +1,7 @@
 import { Wish } from "./wish.model";
 import { generateWish } from "../ai/ai.service";
 import { uploadImage, uploadAudio } from "../media/media.service";
+import { checkAndUpdateQuota } from "../../utils/quota.util";
 
 type GenerateWishInput = {
   userId: string;
@@ -23,6 +24,8 @@ export const generateAndSaveWish = async (input: GenerateWishInput) => {
     language: input.language,
     tone: input.tone,
   });
+
+  await checkAndUpdateQuota(input.userId);
 
   let imageUrl: string | undefined;
   let audioUrl: string | undefined;
